@@ -1,6 +1,7 @@
 class postgresql::server($version="9.0",
                          $listen_addresses='*',
                          $max_connections=100,
+                         $memorysize_mb,
                          $use_ssl=false,
                          $durable=true) {
 

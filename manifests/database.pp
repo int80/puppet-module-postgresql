@@ -12,7 +12,6 @@ define postgresql::database($owner, $ensure=present) {
       command => "createdb -O $owner $name",
       user => "postgres",
       unless => $dbexists,
-      require => Postgresql::User[$owner],
     }
 
 
@@ -22,7 +21,6 @@ define postgresql::database($owner, $ensure=present) {
       command => "dropdb $name",
       user => "postgres",
       onlyif => $dbexists,
-      before => Postgresql::User[$owner],
     }
   }
 }
