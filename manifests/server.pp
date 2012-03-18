@@ -1,10 +1,15 @@
 class postgresql::server($version="9.0",
                          $listen_addresses='*',
                          $max_connections=100,
-                         $memorysize_mb,
+                         $memsize_mb=undef,
                          $use_ssl=false,
                          $durable=true) {
 
+  $memorysize_mb = $memsize_mb ? {
+    default => $memsize_mb,
+    undef => $::memorysize_mb
+  }
+                           
   $postgresql = $operatingsystem ? {
     /(?i)(ubuntu|debian)/ => "postgresql-${version}",
     default               => undef,
